@@ -58,26 +58,47 @@ export default function TextForm(props) {
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>
-          Convert to uppercase
+        <button
+          className="formbtn btn btn-primary"
+          onClick={handleUpClick}
+          disabled={text.length === 0}
+        >
+          To uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleLoClick}>
-          Convert to lowercase
+        <button
+          className="formbtn btn btn-primary mx-2"
+          onClick={handleLoClick}
+          disabled={text.length === 0}
+        >
+          To lowercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleClearClick}>
+        <button
+          className="formbtn btn btn-primary mx-2"
+          onClick={handleClearClick}
+          disabled={text.length === 0}
+        >
           Clear the text
         </button>
         <button
           type="submit"
           onClick={speak}
-          className="btn btn-warning mx-2 my-2"
+          className="formbtn btn btn-primary mx-2"
+          disabled={text.length === 0}
         >
           Speak
         </button>
-        <button className="btn btn-primary mx-2" onClick={handleCopy}>
+        <button
+          className="formbtn btn btn-primary mx-2"
+          onClick={handleCopy}
+          disabled={text.length === 0}
+        >
           Copy Text
         </button>
-        <button className="btn btn-primary mx-2" onClick={removeExtraSpace}>
+        <button
+          className="formbtn btn btn-primary mx-2"
+          onClick={removeExtraSpace}
+          disabled={text.length === 0}
+        >
           Remove Extra Space
         </button>
       </div>
@@ -86,6 +107,12 @@ export default function TextForm(props) {
         style={{ color: props.mode === "dark" ? "white" : "black" }}
       >
         <h2>Your text summary</h2>
+        {/* {setInterval(() => {
+          document.body.style.backgroundColor = "pink";
+        }, 2000)}
+        {setInterval(() => {
+          document.body.style.backgroundColor = "red";
+        }, 1500)} */}
         <p>
           {text.length > 0 ? text.trim().split(/\s+/).length : 0} Words and{" "}
           {text.length} characters
