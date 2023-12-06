@@ -17,9 +17,11 @@ export default function TextForm(props) {
     props.showAlert("Cleared text area", "success");
   };
   const handleCopy = () => {
-    let text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+    // let text = document.getElementById("myBox");
+    // text.select();
+    // navigator.clipboard.writeText(text.value);
+    navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied to clipboard", "success");
   };
   const removeExtraSpace = () => {
@@ -59,21 +61,21 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <button
-          className="formbtn btn btn-primary"
+          className="formbtn btn btn-primary mx-1"
           onClick={handleUpClick}
           disabled={text.length === 0}
         >
           To uppercase
         </button>
         <button
-          className="formbtn btn btn-primary mx-2"
+          className="formbtn btn btn-primary mx-1 my-1"
           onClick={handleLoClick}
           disabled={text.length === 0}
         >
           To lowercase
         </button>
         <button
-          className="formbtn btn btn-primary mx-2"
+          className="formbtn btn btn-primary mx-1 my-1"
           onClick={handleClearClick}
           disabled={text.length === 0}
         >
@@ -82,20 +84,20 @@ export default function TextForm(props) {
         <button
           type="submit"
           onClick={speak}
-          className="formbtn btn btn-primary mx-2"
+          className="formbtn btn btn-primary mx-1 my-1"
           disabled={text.length === 0}
         >
           Speak
         </button>
         <button
-          className="formbtn btn btn-primary mx-2"
+          className="formbtn btn btn-primary mx-1 my-1"
           onClick={handleCopy}
           disabled={text.length === 0}
         >
           Copy Text
         </button>
         <button
-          className="formbtn btn btn-primary mx-2"
+          className="formbtn btn btn-primary mx-1 my-1"
           onClick={removeExtraSpace}
           disabled={text.length === 0}
         >
@@ -114,8 +116,15 @@ export default function TextForm(props) {
           document.body.style.backgroundColor = "red";
         }, 1500)} */}
         <p>
-          {text.length > 0 ? text.trim().split(/\s+/).length : 0} Words and{" "}
-          {text.length} characters
+          {text.length > 0
+            ? text
+                .trim()
+                .split(/\s+/)
+                .filter((element) => {
+                  return element.length !== 0;
+                }).length
+            : 0}{" "}
+          Words and {text.length} characters
         </p>
         <p>
           {0.008 * (text.length > 0 ? text.trim().split(" ").length : 0)}{" "}

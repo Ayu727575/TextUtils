@@ -46,7 +46,7 @@ function App() {
                 />
               }
             ></Route>
-            <Route exact path="/about" element={<About />}></Route>
+            <Route exact path="/about" element={<About mode={mode} />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
